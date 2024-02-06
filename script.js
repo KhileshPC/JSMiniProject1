@@ -31,6 +31,45 @@ function setIndicator(color){
 }
 
 function getRndInteger(min,max){
-    Math.floor(Math.random() * (max-min) + min)
+    return Math.floor(Math.random() * (max-min)) + min;
 }
 
+function generateRandomNumber(){
+    return getRndInteger(0,9);
+}
+
+function generateLowerCase(){
+   return String.fromCharCode( getRndInteger(97,123));
+}
+
+function generateUpperrCase(){
+    return String.fromCharCode( getRndInteger(65,91));
+ }
+
+ function generateSymbol(){
+    const randNum = getRndInteger(0,symbols.length);
+    return symbols.charAt(randNum);
+ }
+
+function calcStrength(){
+    let hasUpper = false;
+    let hasLower = false;
+    let hasNum = false;
+    let hasSym = false;
+    if(uppercaseCheck.checked) hasUpper = true;
+    if(lowercaseCheck.checked) hasLower = true;
+    if(numbersCheck.checked) hasNum = true;
+    if(symbolsCheck.checked) hasSym = true;
+    
+    if(hasUpper && hasLower && (hasNum || hasSym) && passwordLength >= 8){
+        setIndicator("#0f0");
+    } else if (
+        (hasLower || hasUpper) && 
+        (hasNum || hasSym) && 
+        passwordLength >= 6
+        ) {
+            setIndicator("#0ff0");
+        } else {
+            setIndicator("#f00");
+        }
+    }
