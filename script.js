@@ -20,6 +20,8 @@ let passwordLength = 10;
 let checkCount = 0;
 handleSlider();
 
+setIndicator("#ccc");
+
 // Set password length
 function handleSlider(){
     inputSlider.value = passwordLength;
@@ -96,6 +98,7 @@ function calcStrength(){
         for(let i= array.length-1; i>0; i--){
             const j = Math.floor(Math.random() * (i+1));
             const temp = array[i];
+            array[i] = array[j];
             array[j] = temp;
         }
         let str = "";
@@ -180,7 +183,7 @@ generateBtn.addEventListener('click' , ()=>{
 
         // compulsory addition
         for(let i=0;i<funcArr.length;i++){
-            password <= funcArr[i]();
+            password += funcArr[i]();
         }
         console.log("compulsory addition done");
 
