@@ -26,10 +26,15 @@ setIndicator("#ccc");
 function handleSlider(){
     inputSlider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
+
+    const min = inputSlider.min;
+    const max = inputSlider.max;
+    inputSlider.style.backgroundSize = ((passwordLength - min)*100/(max-min)) + "% 100%"
 }
 
 function setIndicator(color){
     indicator.style.backgroundColor = color;
+    indicator.style.boxShadow = '0px 0px 12px 1px ${color}';
 }
 
 function getRndInteger(min,max){
@@ -65,16 +70,21 @@ function calcStrength(){
     
     if(hasUpper && hasLower && (hasNum || hasSym) && passwordLength >= 8){
         setIndicator("#0f0");
-    } else if (
+    } else if ((hasUpper || hasLower) && hasNum && hasSym && passwordLength >= 8){
+        setIndicator("#0f0")
+    } 
+        else if (
         (hasLower || hasUpper) && 
         (hasNum || hasSym) && 
         passwordLength >= 6
         ) {
-            setIndicator("#0ff0");
-        } else {
             setIndicator("#f00");
+        } else{
+            setIndicator("#f00")
         }
     }
+
+    
 
     async function copyContent(){
         try{
